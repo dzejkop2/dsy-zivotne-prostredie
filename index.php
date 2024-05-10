@@ -1,5 +1,6 @@
 <?php
     include("./connect.php");
+    include("./functions.php")
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
@@ -17,9 +18,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Kategoria</th>
                             <th scope="col">Hodnota</th>
+                            <th scope="col">Kategoria</th>
                             <th scope="col">Senzor</th>
                             <th scope="col">Datum</th>
                         </tr>
@@ -30,32 +30,19 @@
                             SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
                             FROM data
                             JOIN kategoria ON data.kategoria_id = kategoria.id
-                            JOIN senzor ON data.senzor_id = senzor.id;
+                            JOIN senzor ON data.senzor_id = senzor.id
+                            ORDER BY datum DESC;
                             "; 
                             $result = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($result) > 0) 
                             { 
-                                $number = 1;
                                 while($row = mysqli_fetch_assoc($result)) 
                                 { 
-                                    if($row["kategoria_nazov"] == "vlhkost")
-                                    {
-                                        $jednotka = "%"; 
-                                    }
-                                    elseif($row["kategoria_nazov"] == "teplota")
-                                    {
-                                        $jednotka = "°C";
-                                    }
-                                    else 
-                                    {
-                                        $jednotka = "";
-                                    }
-                                    echo "<tr><th scope=\"row\">".$number."</th><td>".$row["kategoria_nazov"]."</td>
-                                        <td>".$row["hodnota"]."".$jednotka."</td>
-                                        <td>Senzor ".$row["senzor_id"].", ".$row["senzor_lokacia"]."</td>
-                                        <td>".$row["datum"]."</td></tr>"; 
-                                    $number++;
+                                    echo "<tr><th scope=\"row\">".$row["hodnota"]."".jednotka($row["kategoria_nazov"])."</th>
+                                    <td>".$row["kategoria_nazov"]."</td>
+                                    <td>Senzor ".$row["senzor_id"].", ".$row["senzor_lokacia"]."</td>
+                                    <td>".$row["datum"]."</td></tr>"; 
                                 } 
                             } 
                         ?>
@@ -63,12 +50,13 @@
                 </table>
             </div>
             <div class="col-4">
-                <h2>Senzory:</h2>
+                <h2>Miesta:</h2>
                 <div class="list-group">
                     <?php
                         $query = "
                         SELECT *
                         FROM senzor
+                        GROUP BY lokacia    
                         "; 
                         $result = mysqli_query($conn, $query);
                         
@@ -76,7 +64,7 @@
                         { 
                             while($row = mysqli_fetch_assoc($result)) 
                             { 
-                                echo "<a href=\"#\" class=\"list-group-item list-group-item-action\">Senzor ".$row["id"].", ".$row["lokacia"]."</a>";
+                                echo "<a href=\"./lokalita_info.php?lokalita=".$row["lokacia"]."\" class=\"list-group-item list-group-item-action\">".$row["lokacia"]."</a>";
                             } 
                         } 
                     ?>

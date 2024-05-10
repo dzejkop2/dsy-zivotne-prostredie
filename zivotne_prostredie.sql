@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 09, 2024 at 09:50 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Počítač: 127.0.0.1
+-- Vytvořeno: Pát 10. kvě 2024, 09:09
+-- Verze serveru: 10.4.28-MariaDB
+-- Verze PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `zivotne_prostredie`
+-- Databáze: `zivotne_prostredie`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data`
+-- Struktura tabulky `data`
 --
 
 CREATE TABLE `data` (
@@ -36,17 +36,19 @@ CREATE TABLE `data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovak_ci;
 
 --
--- Dumping data for table `data`
+-- Vypisuji data pro tabulku `data`
 --
 
 INSERT INTO `data` (`id`, `kategoria_id`, `hodnota`, `senzor_id`, `datum`) VALUES
 (1, 1, 40.00, 2, '2024-05-03 09:12:18'),
-(2, 2, 18.00, 1, '2024-05-09 18:04:34');
+(2, 2, 18.00, 1, '2024-05-09 18:04:34'),
+(3, 2, 8.00, 3, '2024-05-10 08:05:52'),
+(4, 2, 19.00, 1, '2024-05-10 08:56:02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategoria`
+-- Struktura tabulky `kategoria`
 --
 
 CREATE TABLE `kategoria` (
@@ -55,7 +57,7 @@ CREATE TABLE `kategoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovak_ci;
 
 --
--- Dumping data for table `kategoria`
+-- Vypisuji data pro tabulku `kategoria`
 --
 
 INSERT INTO `kategoria` (`id`, `nazov`) VALUES
@@ -65,7 +67,7 @@ INSERT INTO `kategoria` (`id`, `nazov`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Struktura tabulky `role`
 --
 
 CREATE TABLE `role` (
@@ -74,7 +76,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovak_ci;
 
 --
--- Dumping data for table `role`
+-- Vypisuji data pro tabulku `role`
 --
 
 INSERT INTO `role` (`id`, `nazov`) VALUES
@@ -84,7 +86,7 @@ INSERT INTO `role` (`id`, `nazov`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `senzor`
+-- Struktura tabulky `senzor`
 --
 
 CREATE TABLE `senzor` (
@@ -95,17 +97,18 @@ CREATE TABLE `senzor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovak_ci;
 
 --
--- Dumping data for table `senzor`
+-- Vypisuji data pro tabulku `senzor`
 --
 
 INSERT INTO `senzor` (`id`, `lokacia`, `posledny_update`, `vybavenie`) VALUES
 (1, 'Kysucké Nové Mesto', '2024-05-03 09:08:14', 'teplomer'),
-(2, 'Kysucké Nové Mesto', '2024-05-03 09:09:09', 'vlhkomer');
+(2, 'Kysucké Nové Mesto', '2024-05-03 09:09:09', 'vlhkomer'),
+(3, 'Vranov nad Topľou', '2024-05-10 07:57:47', 'teplomer');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabulky `users`
 --
 
 CREATE TABLE `users` (
@@ -117,18 +120,18 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovak_ci;
 
 --
--- Dumping data for table `users`
+-- Vypisuji data pro tabulku `users`
 --
 
 INSERT INTO `users` (`id`, `meno`, `email`, `heslo`, `id_rola`) VALUES
 (1, 'Tonko Maslak', 'tonko@tonko.tonko', 'tonislav123', 2);
 
 --
--- Indexes for dumped tables
+-- Indexy pro exportované tabulky
 --
 
 --
--- Indexes for table `data`
+-- Indexy pro tabulku `data`
 --
 ALTER TABLE `data`
   ADD PRIMARY KEY (`id`),
@@ -136,25 +139,25 @@ ALTER TABLE `data`
   ADD KEY `senzor_id` (`senzor_id`);
 
 --
--- Indexes for table `kategoria`
+-- Indexy pro tabulku `kategoria`
 --
 ALTER TABLE `kategoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role`
+-- Indexy pro tabulku `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `senzor`
+-- Indexy pro tabulku `senzor`
 --
 ALTER TABLE `senzor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexy pro tabulku `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -162,52 +165,52 @@ ALTER TABLE `users`
   ADD KEY `FK_rola` (`id_rola`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pro tabulky
 --
 
 --
--- AUTO_INCREMENT for table `data`
+-- AUTO_INCREMENT pro tabulku `data`
 --
 ALTER TABLE `data`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `kategoria`
+-- AUTO_INCREMENT pro tabulku `kategoria`
 --
 ALTER TABLE `kategoria`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `role`
+-- AUTO_INCREMENT pro tabulku `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `senzor`
+-- AUTO_INCREMENT pro tabulku `senzor`
 --
 ALTER TABLE `senzor`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pro tabulku `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Omezení pro exportované tabulky
 --
 
 --
--- Constraints for table `data`
+-- Omezení pro tabulku `data`
 --
 ALTER TABLE `data`
   ADD CONSTRAINT `data_ibfk_1` FOREIGN KEY (`kategoria_id`) REFERENCES `kategoria` (`id`),
   ADD CONSTRAINT `data_ibfk_2` FOREIGN KEY (`senzor_id`) REFERENCES `senzor` (`id`);
 
 --
--- Constraints for table `users`
+-- Omezení pro tabulku `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `FK_rola` FOREIGN KEY (`id_rola`) REFERENCES `role` (`id`);
