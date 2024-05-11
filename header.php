@@ -5,14 +5,28 @@
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-            <a class="nav-link" href="./login.php">Login</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="./register.php">Register</a>
-            </li>
-        </ul>
+        <?php
+            if(isset($_SESSION["user_id"]) == "") {
+                echo "<ul class=\"navbar-nav\">
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./login.php\">Login</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./register.php\">Register</a>
+                        </li>
+                </ul>";
+            }
+            else {
+                echo "<ul class=\"navbar-nav\">
+                         <li class=\"nav-item\">
+                            <p class=\"nav-link\">".$_SESSION["user_id"]."</p>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./logout.php\">Logout</a>
+                        </li>
+                    </ul>";
+            }
+        ?>
         </div>
     </div>
 </nav>
