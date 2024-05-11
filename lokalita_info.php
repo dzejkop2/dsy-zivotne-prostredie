@@ -52,15 +52,18 @@
                 </table>
             </div>
             <div class="col-4">
+                <?php ?>
                 <div class="row mb-2">
                     <h2>Priemerna teplota:</h2>
-                    <?php 
-                        $query= "
-                        "
-                    ?>
+                    <h2><?php 
+                        echo avg_hodnota("teplota",$conn,$_GET["lokalita"]);
+                    ?></h2>
                 </div>
                 <div class="row mb-2">
                     <h2>Priemerna vlhkost:</h2>
+                    <h2><?php 
+                        echo avg_hodnota("vlhkost",$conn,$_GET["lokalita"]);
+                    ?></h2>
                 </div>
                 <div class="row mb-2">
                     <h2>Senzory:</h2>
