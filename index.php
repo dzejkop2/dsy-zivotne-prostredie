@@ -27,13 +27,26 @@
                     </thead>
                     <tbody>
                         <?php
-                            $query = "
-                            SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                            FROM data
-                            JOIN kategoria ON data.kategoria_id = kategoria.id
-                            JOIN senzor ON data.senzor_id = senzor.id
-                            ORDER BY datum DESC;
-                            "; 
+                            if(isset($_GET["kategoria"])) {
+                                $query = "
+                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                FROM data
+                                JOIN kategoria ON data.kategoria_id = kategoria.id
+                                JOIN senzor ON data.senzor_id = senzor.id
+                                WHERE kategoria.nazov = \"".$_GET["kategoria"]."\"
+                                ORDER BY datum DESC;
+                                "; 
+                            }
+                            else {
+                                $query = "
+                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                FROM data
+                                JOIN kategoria ON data.kategoria_id = kategoria.id
+                                JOIN senzor ON data.senzor_id = senzor.id
+                                ORDER BY datum DESC;
+                                "; 
+                            }
+                            
                             $result = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($result) > 0) 
@@ -51,26 +64,32 @@
                 </table>
             </div>
             <div class="col-4">
-                <h2>Miesta:</h2>
-                <div class="list-group">
-                    <?php
-                        $query = "
-                        SELECT *
-                        FROM senzor
-                        GROUP BY lokacia    
-                        "; 
-                        $result = mysqli_query($conn, $query);
-                        
-                        if (mysqli_num_rows($result) > 0) 
-                        { 
-                            while($row = mysqli_fetch_assoc($result)) 
-                            { 
-                                echo "<a href=\"./lokalita_info.php?lokalita=".$row["lokacia"]."\" class=\"list-group-item list-group-item-action\">".$row["lokacia"]."</a>";
-                            } 
-                        } 
-                    ?>
+                <div class="row mb-2">
+                    <h2>Kategoria:</h2>
+                        <?php include("./dropdown_kategoria.php");?>
+                    </div>
                 </div>
-                    
+                <div class="row mb-2">
+                    <h2>Miesta:</h2>
+                    <div class="list-group">
+                        <?php
+                            $query = "
+                            SELECT *
+                            FROM senzor
+                            GROUP BY lokacia    
+                            "; 
+                            $result = mysqli_query($conn, $query);
+                            
+                            if (mysqli_num_rows($result) > 0) 
+                            { 
+                                while($row = mysqli_fetch_assoc($result)) 
+                                { 
+                                    echo "<a href=\"./lokalita_info.php?lokalita=".$row["lokacia"]."\" class=\"list-group-item list-group-item-action\">".$row["lokacia"]."</a>";
+                                } 
+                            } 
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

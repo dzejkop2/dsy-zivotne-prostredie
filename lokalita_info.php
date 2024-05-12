@@ -28,14 +28,37 @@
                     </thead>
                     <tbody>
                         <?php
-                            $query = "
-                            SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                            FROM data
-                            JOIN kategoria ON data.kategoria_id = kategoria.id
-                            JOIN senzor ON data.senzor_id = senzor.id
-                            WHERE senzor.lokacia = \"".$_GET["lokalita"]."\"
-                            ORDER BY datum DESC;
-                            "; 
+                            if(isset($_GET["senzor"])) {
+                                $query = "
+                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                FROM data
+                                JOIN kategoria ON data.kategoria_id = kategoria.id
+                                JOIN senzor ON data.senzor_id = senzor.id
+                                WHERE senzor.lokacia = \"".$_GET["lokalita"]."\" AND senzor.id = ".$_GET["senzor"]."
+                                ORDER BY datum DESC;
+                                "; 
+                            } 
+                            else if(isset($_GET["kategoria"])) {
+                                $query = "
+                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                FROM data
+                                JOIN kategoria ON data.kategoria_id = kategoria.id
+                                JOIN senzor ON data.senzor_id = senzor.id
+                                WHERE senzor.lokacia = \"".$_GET["lokalita"]."\" AND kategoria.nazov = \"".$_GET["kategoria"]."\"
+                                ORDER BY datum DESC;
+                                "; 
+                            }
+                            else {
+                                $query = "
+                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                FROM data
+                                JOIN kategoria ON data.kategoria_id = kategoria.id
+                                JOIN senzor ON data.senzor_id = senzor.id
+                                WHERE senzor.lokacia = \"".$_GET["lokalita"]."\"
+                                ORDER BY datum DESC;
+                                "; 
+                            }
+                            
                             $result = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($result) > 0) 
@@ -53,7 +76,13 @@
                 </table>
             </div>
             <div class="col-4">
-                <?php ?>
+                <?php 
+                    if(!isset($_GET["senzor"])) {
+                        echo "<div class=\"row mb-2\">";
+                        include("./dropdown_kategoria.php");
+                        echo "</div>";   
+                    }
+                ?>
                 <div class="row mb-2">
                     <h2>Priemerna teplota:</h2>
                     <h2><?php 
@@ -82,7 +111,7 @@
                             { 
                                 while($row = mysqli_fetch_assoc($result)) 
                                 { 
-                                    echo "<a href=\"#\" class=\"list-group-item list-group-item-action\">Senzor ".$row["id"].", ".$row["lokacia"]."</a>";
+                                    echo "<a href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?lokalita=".$_GET["lokalita"]."&senzor=".$row["id"]."\" class=\"list-group-item list-group-item-action\">Senzor ".$row["id"].", ".$row["lokacia"]."</a>";
                                 } 
                             } 
                         ?>
