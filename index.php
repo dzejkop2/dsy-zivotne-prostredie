@@ -65,9 +65,8 @@
             </div>
             <div class="col-4">
                 <div class="row mb-2">
-                    <h2>Kategoria:</h2>
-                        <?php include("./dropdown_kategoria.php");?>
-                    </div>
+                    <h2>Kategória dát:</h2>
+                    <?php include("./dropdown_kategoria.php");?>
                 </div>
                 <div class="row mb-2">
                     <h2>Miesta:</h2>

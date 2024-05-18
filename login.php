@@ -22,7 +22,7 @@
             
         } 
         else {
-            $error = "Invalid username or password";
+            $error = "Nesprávny email alebo heslo";
         }
     }
 ?>
@@ -38,17 +38,17 @@
 <body>
     <header><?php include_once("./header.php")?></header>
     <div class="container-sm mt-3" style="max-width:500px;">
-        <h2>Login</h2>
+        <h2 class="text-center mb-4">Login</h2>
         <?php if (isset($error)): ?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <label for="password" class="form-label">Heslo</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <button type="submit" class="btn btn-primary" name="login">Login</button>
