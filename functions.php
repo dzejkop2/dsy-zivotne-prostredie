@@ -44,3 +44,20 @@ function avg_hodnota($kategoria,$conn,$miesto) {
         return "Nie je dostatok informácií";
     }
 }
+
+function role_check($conn) {
+    if(isset($_SESSION["user_id"]) != "") {
+        $role_id = $_SESSION["role_id"];
+        $query = "SELECT * FROM role WHERE id = ".$role_id."";
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) 
+        { 
+            while($row = mysqli_fetch_assoc($result)) 
+            { 
+                $rola_user = $row["nazov"];
+                return $rola_user;
+            } 
+        } 
+    }
+}

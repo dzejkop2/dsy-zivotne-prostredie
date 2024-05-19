@@ -2,6 +2,7 @@
     include("./connect.php");
     include("./functions.php");
     session_start();
+    $rola_user = role_check($conn);
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
@@ -129,28 +130,30 @@
                         } 
                     } 
                 ?>
-                <div class="row mb-2">
-                    <h2>Senzory:</h2>
-                    <div class="list-group">
-                        <?php
+                <?php if(isset($rola_user) && $rola_user != "obyvatel"): ?>
+                    <div class="row mb-2">
+                        <h2>Senzory:</h2>
+                        <div class="list-group">
+                            <?php
 
-                            $query = "
-                            SELECT *
-                            FROM senzor 
-                            WHERE lokacia = \"".$_GET["lokalita"]."\"
-                            "; 
-                            $result = mysqli_query($conn, $query);
-                            
-                            if (mysqli_num_rows($result) > 0) 
-                            { 
-                                while($row = mysqli_fetch_assoc($result)) 
+                                $query = "
+                                SELECT *
+                                FROM senzor 
+                                WHERE lokacia = \"".$_GET["lokalita"]."\"
+                                "; 
+                                $result = mysqli_query($conn, $query);
+                                
+                                if (mysqli_num_rows($result) > 0) 
                                 { 
-                                    echo "<a href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?lokalita=".$_GET["lokalita"]."&senzor=".$row["id"]."\" class=\"list-group-item list-group-item-action\">Senzor ".$row["id"].", ".$row["lokacia"]."</a>";
+                                    while($row = mysqli_fetch_assoc($result)) 
+                                    { 
+                                        echo "<a href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?lokalita=".$_GET["lokalita"]."&senzor=".$row["id"]."\" class=\"list-group-item list-group-item-action\">Senzor ".$row["id"].", ".$row["lokacia"]."</a>";
+                                    } 
                                 } 
-                            } 
-                        ?>
+                            ?>
+                        </div>
                     </div>
-                </div>
+                <?php endif;?>
             </div>
         </div>
     </div>

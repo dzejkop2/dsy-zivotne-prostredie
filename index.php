@@ -2,6 +2,7 @@
     include("./connect.php");
     include("./functions.php");
     session_start();
+    
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
