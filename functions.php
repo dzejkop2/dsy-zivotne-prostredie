@@ -36,7 +36,7 @@ function avg_hodnota($kategoria,$conn,$miesto) {
         {   
             $sum += floatval($row["hodnota"]);    
         } 
-        $avg = "".$sum / mysqli_num_rows($result2)."".jednotka($kategoria)."";
+        $avg = "".round($sum / mysqli_num_rows($result2),2)."".jednotka($kategoria)."";
         return $avg;
     }
     else
@@ -59,5 +59,39 @@ function role_check($conn) {
                 return $rola_user;
             } 
         } 
+    }
+}
+
+function kategoria_checker($senzor_id,$conn) {
+    $query = "SELECT * FROM senzor WHERE id = ".$senzor_id."";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            if($row["vybavenie"] == "teplomer")
+            {
+                $kategoria = "teplota"; 
+            }
+            elseif($row["vybavenie"] == "vlhkomer")
+            {
+                $kategoria = "vlhkost";
+            }
+        }
+    }
+    $query2 = "SELECT * FROM kategoria WHERE nazov = \"".$kategoria."\"";
+    $result2 = mysqli_query($conn, $query2);
+    if (mysqli_num_rows($result2) > 0) {
+        while($row = mysqli_fetch_assoc($result2)) {
+            return $row["id"];
+        }
+    }
+}
+
+function kategoria_id($kategoria,$conn) {
+    $query = "SELECT * FROM kategoria WHERE nazov = \"".$kategoria."\"";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            return $row["id"];
+        }
     }
 }

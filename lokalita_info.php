@@ -16,7 +16,7 @@
     <header><?php include_once("./header.php")?></header>
     <div class="container-xxl column-gap-3">
         <div class="row mt-2">
-            <h1>Lokalita: <?php echo $_GET["lokalita"]; ?></h1>
+            <h1>Lokalita: <?php echo $_GET["lokalita"]; if(isset($_GET["senzor"])) echo " | Senzor: ".$_GET["senzor"]."";?></h1>
             <div class="col-8">
                 <table class="table table-striped">
                     <thead>
@@ -83,6 +83,30 @@
                         echo "<h2>Kategória dát:</h2>";
                         include("./dropdown_kategoria.php");
                         echo "</div>";   
+                    }
+                    else {
+                        $query = "SELECT posledny_update,vybavenie FROM senzor WHERE id = ".$_GET["senzor"]."";
+                        $result = mysqli_query($conn, $query);
+                        if (mysqli_num_rows($result) > 0) 
+                        { 
+                            while($row = mysqli_fetch_assoc($result)) 
+                            {   
+                                $posledny_update = $row["posledny_update"];
+                                $vybavenie = $row["vybavenie"];
+                            } 
+                        } 
+                        echo "
+                        <div class=\"row mb-2\">
+                            <h2>Posledny update:</h2>
+                            <h2>".$posledny_update."</h2>  
+                        </div>
+                        ";  
+                        echo "
+                        <div class=\"row mb-2\">
+                            <h2>Vybavenie senzoru:</h2>
+                            <h2>".$vybavenie."</h2>  
+                        </div>
+                        ";   
                     }
                 ?>
                 <?php 

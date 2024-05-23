@@ -4,29 +4,59 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        
         <?php
+            $rola_user = role_check($conn);
             if(isset($_SESSION["user_id"]) == "") {
-                echo "<ul class=\"navbar-nav\">
+                    echo "
+                    <ul class=\"navbar-nav\">
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"./login.php\">Login</a>
                         </li>
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"./register.php\">Register</a>
                         </li>
-                </ul>";
+                    </ul>
+                ";
             }
             else {
-                echo "<ul class=\"navbar-nav\">
-                         <li class=\"nav-item\">
-                            <p class=\"nav-link\">".$_SESSION["user_id"]."</p>
+                if($rola_user == "vedec") {
+                    echo "
+                    <div class=\"collapse navbar-collapse\" id=\"navbar_left\">
+                        <ul class=\"navbar-nav\">
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"./add_data.php\">Pridat data</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarNav\">
+                        <ul class=\"navbar-nav\">
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\">".$_SESSION["user_id"]."</a>
+                            </li>
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"./logout.php\">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    ";
+                }
+                else {
+                echo "
+                <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarNav\">
+                    <ul class=\"navbar-nav\">
+                            <li class=\"nav-item\">
+                            <a class=\"nav-link\">".$_SESSION["user_id"]."</a>
                         </li>
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"./logout.php\">Logout</a>
                         </li>
-                    </ul>";
+                    </ul>
+                </div>
+                ";
+                }
             }
         ?>
-        </div>
+        
     </div>
 </nav>
