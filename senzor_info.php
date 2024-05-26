@@ -3,7 +3,7 @@
     include("./functions.php");
     session_start();
     $rola_user = role_check($conn);
-    if ($rola_user != "uradnik") {
+    if ($rola_user != "uradnik"  && $rola_user != "vedec") {
         header("Location: index.php");
     }
 ?>

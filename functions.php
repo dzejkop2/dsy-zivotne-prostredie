@@ -61,7 +61,7 @@ function role_check($conn) {
         } 
     }
 }
-
+/*
 function kategoria_checker($senzor_id,$conn) {
     $query = "SELECT * FROM senzor WHERE id = ".$senzor_id."";
     $result = mysqli_query($conn, $query);
@@ -95,6 +95,7 @@ function kategoria_id($kategoria,$conn) {
         }
     }
 }
+*/
 
 function get_name($user_id,$conn) {
     $query = "SELECT * FROM users WHERE id = ".$user_id."";
