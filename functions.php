@@ -95,3 +95,13 @@ function kategoria_id($kategoria,$conn) {
         }
     }
 }
+
+function get_name($user_id,$conn) {
+    $query = "SELECT * FROM users WHERE id = ".$user_id."";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            return $row["meno"];
+        }
+    }
+}

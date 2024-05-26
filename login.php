@@ -15,7 +15,7 @@
                 {
                     $_SESSION["user_id"] = $row["id"];
                     $_SESSION["role_id"] = $row["id_rola"];
-                    header('Location: index.php'); 
+                    header('Location: ./index.php'); 
                     exit;
                 }
             } 

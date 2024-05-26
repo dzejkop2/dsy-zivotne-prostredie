@@ -24,9 +24,6 @@
                             <th scope="col">Kategoria</th>
                             <th scope="col">Senzor</th>
                             <th scope="col">Datum</th>
-                            <?php if(isset($_SESSION["user_id"]) != "" && role_check($conn) == "vedec") {
-                                echo "<th scope=\"col\">#</th>";
-                            } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,26 +54,13 @@
                             { 
                                 while($row = mysqli_fetch_assoc($result)) 
                                 { 
-                                    if(isset($_SESSION["user_id"]) != "" && role_check($conn) == "vedec") {
-                                        echo "
-                                            <tr>
-                                                <th scope=\"row\">".$row["hodnota"]."".jednotka($row["kategoria_nazov"])."</th>
-                                                <td>".$row["kategoria_nazov"]."</td>
-                                                <td>Senzor ".$row["senzor_id"].", ".$row["senzor_lokacia"]."</td>
-                                                <td>".$row["datum"]."</td>
-                                                <td><form method=\"post\" action=\"./delete.php\"><button type=\"submit\" class=\"btn btn-primary\" style=\"--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .45rem; --bs-btn-font-size: .7rem;\" name=\"data_id\" value=\"".$row["id"]."\">Vymazať</button></form></td> 
-                                            </tr>"; 
-                                    }
-                                    else {
-                                        echo "
-                                        <tr>
-                                            <th scope=\"row\">".$row["hodnota"]."".jednotka($row["kategoria_nazov"])."</th>
-                                            <td>".$row["kategoria_nazov"]."</td>
-                                            <td>Senzor ".$row["senzor_id"].", ".$row["senzor_lokacia"]."</td>
-                                            <td>".$row["datum"]."</td>
-                                        </tr>"; 
-                                    }
-                                    
+                                    echo "
+                                    <tr>
+                                        <th scope=\"row\">".$row["hodnota"]."".jednotka($row["kategoria_nazov"])."</th>
+                                        <td>".$row["kategoria_nazov"]."</td>
+                                        <td>Senzor ".$row["senzor_id"].", ".$row["senzor_lokacia"]."</td>
+                                        <td>".$row["datum"]."</td>
+                                    </tr>"; 
                                 } 
                             } 
                         ?>
