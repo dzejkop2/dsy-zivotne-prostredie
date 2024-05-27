@@ -73,6 +73,10 @@
                     <?php include("./dropdown_kategoria.php");?>
                 </div>
                 <div class="row mb-2">
+                    <h2>Čas dát:</h2>
+                    <?php include("./dropdown_cas.php");?>
+                </div>
+                <div class="row mb-2">  
                     <h2>Miesta:</h2>
                     <div class="list-group">
                         <?php

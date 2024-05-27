@@ -86,6 +86,10 @@
                         echo "<h2>Kategória dát:</h2>";
                         include("./dropdown_kategoria.php");
                         echo "</div>";   
+                        echo "<div class=\"row mb-2\">";
+                        echo "<h2>Čas dát:</h2>";
+                        include("./dropdown_cas.php");
+                        echo "</div>";   
                     }
                     else {
                         $query = "SELECT posledny_update,vybavenie FROM senzor WHERE id = ".$_GET["senzor"]."";
