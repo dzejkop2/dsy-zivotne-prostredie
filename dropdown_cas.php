@@ -6,7 +6,7 @@
                 echo $_GET["cas"];
                 echo " dní";
             } 
-            else if($_GET["cas"] == "1"){
+            else if(isset($_GET["cas"]) && $_GET["cas"] == "1"){
                 echo "Dnes";
             }
             else {
@@ -22,7 +22,7 @@
     <ul class="dropdown-menu">
         <?php 
             
-            if($_GET["cas"] != "1") {
+            if(isset($_GET["cas"]) && $_GET["cas"] != "1" || !isset($_GET["cas"])) {
                 if(isset($_GET["lokalita"]) && isset($_GET["kategoria"])) {
                     echo "<li><a class=\"dropdown-item\" href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?cas=1&lokalita=".$_GET["lokalita"]."&kategoria=".$_GET["kategoria"]."\">Dnes</a></li>";
                 } 
@@ -38,8 +38,12 @@
             }
             $i = 15;
             while($i <= 30) {
-                if($_GET["cas"] != $i)
+                if(isset($_GET["cas"]) && $_GET["cas"] == $i)
                 {
+                    $i += 15;
+                    continue;
+                } 
+                else {
                     if(isset($_GET["lokalita"]) && isset($_GET["kategoria"])) {
                         echo "<li><a class=\"dropdown-item\" href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?cas=".$i."&lokalita=".$_GET["lokalita"]."&kategoria=".$_GET["kategoria"]."\">".$i." dní</a></li>";
                     } 
@@ -52,8 +56,9 @@
                     else {
                         echo "<li><a class=\"dropdown-item\" href=\"".htmlspecialchars($_SERVER["PHP_SELF"])."?cas=".$i."\">".$i." dní</a></li>";
                     }
+                    $i += 15;
                 }
-                $i += 15;                
+                                
             }    
             if(isset($_GET["cas"])) {
                 if($rola_user != "obyvatel" && isset($_SESSION["user_id"]) != "") {
