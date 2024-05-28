@@ -15,10 +15,10 @@
         if (mysqli_num_rows($result) == 0) { 
             $sql = "INSERT INTO `users` (`meno`, `email`, `heslo`, `id_rola`) VALUES (\"$full_name\", \"$email\", \"$password\", \"$role\")";
             if(mysqli_query($conn, $sql)) {
-                $register_success = "Registration successful! You can now login.";
+                $register_success = "Registracia uspešna! Teraz sa možeš prihlasiť.";
             } 
             else {
-                $error = "Konto na tento email už existuje!";
+                $error = "Niečo sa pokazilo! Skús ešte raz!";
             }
         
         } 

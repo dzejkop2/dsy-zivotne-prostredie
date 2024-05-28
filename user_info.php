@@ -34,13 +34,13 @@
 <body>
     <header><?php include_once("./header.php")?></header>
     <div class="container-xxl column-gap-3">
-        <div class="row mt-2">
+        <div class="row mt-2 d-flex justify-content-center">
             <h1><?php echo $meno;?></h1>
-            <div class="col-8">
+            <div class="col-5">
                 <h2>Email: <?php echo $email;?></h2>
                 <h2>Rola: <?php echo $rola_user;?></h2>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="row mb-2">
                     <h2>Vymazať profil</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
