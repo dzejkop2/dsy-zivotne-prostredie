@@ -78,12 +78,6 @@
                 <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
                 <div class="row mb-2">
-                    <h2>Vymazať profil</h2>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>
-                    </form>
-                </div>
-                <div class="row mb-2">
                     <h2>Zmeniť email</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="mb-3">
@@ -101,6 +95,12 @@
                             <input type="password" class="form-control" id="heslo" name="heslo" required>
                         </div>
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_password\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
+                    </form>
+                </div>
+                <div class="row mb-2">
+                    <h2>Vymazať profil</h2>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>
                     </form>
                 </div>
             </div>
