@@ -22,6 +22,36 @@
             echo "Nieco sa posralo";
         }
     } 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_mail'])) {
+        $email = $_POST['email'];
+        $user_id = $_POST['new_mail'];
+        $query = "SELECT * FROM users WHERE email = \"".$email."\";"; 
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) == 0) { 
+            $sql = "UPDATE users SET email = \"".$email."\" WHERE id = ".$user_id."";
+            if(mysqli_query($conn, $sql)) {
+                $success = "Email zmenený úspešne";
+            } 
+            else {
+                $error = "Niečo sa pokazilo! Skús ešte raz!";
+            }
+        
+        } 
+        else {
+            $error = "Tento email sa už používa!";
+        }
+    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_password'])) {
+        $password = $_POST['heslo'];
+        $user_id = $_POST['new_password'];
+        $sql = "UPDATE users SET heslo = \"".$password."\" WHERE id = ".$user_id."";
+        if(mysqli_query($conn, $sql)) {
+            $success = "Heslo zmenené úspešne";
+        } 
+        else {
+            $error = "Niečo sa pokazilo! Skús ešte raz!";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
@@ -41,10 +71,36 @@
                 <h2>Rola: <?php echo $rola_user;?></h2>
             </div>
             <div class="col-3">
+            <?php if (isset($success)): ?>
+                <div class="alert alert-success"><?php echo $success; ?></div>
+            <?php endif; ?>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger"><?php echo $error; ?></div>
+            <?php endif; ?>
                 <div class="row mb-2">
                     <h2>Vymazať profil</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>
+                    </form>
+                </div>
+                <div class="row mb-2">
+                    <h2>Zmeniť email</h2>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Nový email</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                        </div>
+                        <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_mail\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
+                    </form>
+                </div>
+                <div class="row mb-2">
+                    <h2>Zmeniť heslo</h2>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <div class="mb-3">
+                            <label for="heslo" class="form-label">Heslo</label>
+                            <input type="password" class="form-control" id="heslo" name="heslo" required>
+                        </div>
+                        <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_password\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
                     </form>
                 </div>
             </div>
