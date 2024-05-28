@@ -37,7 +37,7 @@
                 }
             }
             $i = 15;
-            while($i <= 60) {
+            while($i <= 30) {
                 if($_GET["cas"] != $i)
                 {
                     if(isset($_GET["lokalita"]) && isset($_GET["kategoria"])) {

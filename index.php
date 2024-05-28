@@ -2,7 +2,7 @@
     include("./connect.php");
     include("./functions.php");
     session_start();
-    
+    $rola_user = role_check($conn);
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="dark">
@@ -28,25 +28,99 @@
                     </thead>
                     <tbody>
                         <?php
-                            if(isset($_GET["kategoria"])) {
-                                $query = "
-                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                                FROM data
-                                JOIN kategoria ON data.kategoria_id = kategoria.id
-                                JOIN senzor ON data.senzor_id = senzor.id
-                                WHERE kategoria.nazov = \"".$_GET["kategoria"]."\"
-                                ORDER BY datum DESC;
-                                "; 
+                            if($rola_user != "obyvatel" || isset($_SESSION["role_id"]) != "") {
+                                if(isset($_GET["cas"])) {
+                                    if(isset($_GET["kategoria"])) {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE kategoria.nazov = \"".$_GET["kategoria"]."\" AND datum >= NOW() - INTERVAL ".$_GET["cas"]." DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                    else {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE datum >= NOW() - INTERVAL ".$_GET["cas"]." DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                }
+                                else {
+                                    if(isset($_GET["kategoria"])) {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE kategoria.nazov = \"".$_GET["kategoria"]."\"
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                    else {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                }
+                                
                             }
                             else {
-                                $query = "
-                                SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                                FROM data
-                                JOIN kategoria ON data.kategoria_id = kategoria.id
-                                JOIN senzor ON data.senzor_id = senzor.id
-                                ORDER BY datum DESC;
-                                "; 
+                                if(isset($_GET["cas"])) {
+                                    if(isset($_GET["kategoria"])) {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE kategoria.nazov = \"".$_GET["kategoria"]."\" AND datum >= NOW() - INTERVAL ".$_GET["cas"]." DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                    else {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE datum >= NOW() - INTERVAL ".$_GET["cas"]." DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                }
+                                else {
+                                    if(isset($_GET["kategoria"])) {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE kategoria.nazov = \"".$_GET["kategoria"]."\" AND datum >= NOW() - INTERVAL 30 DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                    else {
+                                        $query = "
+                                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
+                                        FROM data
+                                        JOIN kategoria ON data.kategoria_id = kategoria.id
+                                        JOIN senzor ON data.senzor_id = senzor.id
+                                        WHERE datum >= NOW() - INTERVAL 30 DAY
+                                        ORDER BY datum DESC;
+                                        "; 
+                                    }
+                                }
                             }
+                            
                             
                             $result = mysqli_query($conn, $query);
 

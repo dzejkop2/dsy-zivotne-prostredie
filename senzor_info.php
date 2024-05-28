@@ -20,14 +20,14 @@
     <div class="container-xxl column-gap-3">
         <div class="row mt-2">
             <h1>Senzory</h1>
-            <div class="col-8">
+            <div class="col-12">
                 <form method="post">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Lokalita</th>
-                                <th scope="col">Vybavenie</th>
                                 <th scope="col">Posledný update</th>
+                                <th scope="col">Vybavenie</th>
                                 <th scope="col">#</th>
                             </tr>
                         </thead>
