@@ -1,6 +1,7 @@
 <?php
     include("./connect.php");
     include("./functions.php");
+    include("./querry.php");
     session_start();
     $rola_user = role_check($conn);
 ?>
@@ -29,7 +30,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            include("./querry.php");
+                            $query = get_querry(1,$rola_user);
                             $result = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($result) > 0) 
@@ -50,17 +51,18 @@
                 </table>
             </div>
             <div class="col-4">
-                <?php 
-                    if(!isset($_GET["senzor"])) {
-                        echo "<div class=\"row mb-2\">";
-                        echo "<h2>Kategória dát:</h2>";
-                        include("./dropdown_kategoria.php");
-                        echo "</div>";   
-                        echo "<div class=\"row mb-2\">";
-                        echo "<h2>Čas dát:</h2>";
-                        include("./dropdown_cas.php");
-                        echo "</div>";   
-                    }
+                <?php if(!isset($_GET["senzor"])) { ?>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <h2>Kategória dát:</h2>
+                            <?php include("./dropdown_kategoria.php");?>
+                        </div>
+                        <div class="col-6">
+                            <h2>Čas dát:</h2>
+                            <?php include("./dropdown_cas.php");?>
+                        </div>
+                    </div>
+                <?php }
                     else {
                         $query = "SELECT posledny_update,vybavenie FROM senzor WHERE id = ".$_GET["senzor"]."";
                         $result = mysqli_query($conn, $query);
@@ -86,37 +88,9 @@
                         ";   
                     }
                 ?>
-                <?php 
-                    if(isset($_GET["senzor"])) {
-                        $query = "
-                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                        FROM data
-                        JOIN kategoria ON data.kategoria_id = kategoria.id
-                        JOIN senzor ON data.senzor_id = senzor.id
-                        WHERE senzor.lokacia = \"".$_GET["lokalita"]."\" AND senzor.id = ".$_GET["senzor"]."
-                        GROUP BY kategoria.nazov;
-                        "; 
-                    } 
-                    else if(isset($_GET["kategoria"])) {
-                        $query = "
-                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                        FROM data
-                        JOIN kategoria ON data.kategoria_id = kategoria.id
-                        JOIN senzor ON data.senzor_id = senzor.id
-                        WHERE senzor.lokacia = \"".$_GET["lokalita"]."\" AND kategoria.nazov = \"".$_GET["kategoria"]."\"
-                        GROUP BY kategoria.nazov;
-                        "; 
-                    }
-                    else {
-                        $query = "
-                        SELECT data.id, kategoria.nazov AS kategoria_nazov, data.hodnota, senzor.lokacia AS senzor_lokacia,senzor.vybavenie AS senzor_vybavenie, data.datum, data.senzor_id
-                        FROM data
-                        JOIN kategoria ON data.kategoria_id = kategoria.id
-                        JOIN senzor ON data.senzor_id = senzor.id
-                        WHERE senzor.lokacia = \"".$_GET["lokalita"]."\"
-                        GROUP BY kategoria.nazov;
-                        "; 
-                    }
+                <?php
+                    
+                    $query = get_querry(3,$rola_user);
                     
                     $result = mysqli_query($conn, $query);
 

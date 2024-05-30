@@ -67,7 +67,7 @@
         <div class="row mt-2 d-flex justify-content-center">
             <h1><?php echo $meno;?></h1>
             <div class="col-5">
-                <h2>Email: <?php echo $email;?></h2>
+                <h2 class="my-3">Email: <?php echo $email;?></h2>
                 <h2>Rola: <?php echo $rola_user;?></h2>
             </div>
             <div class="col-3">
@@ -77,7 +77,7 @@
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
-                <div class="row mb-2">
+                <div class="row mb-4">
                     <h2>Zmeniť email</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="mb-3">
@@ -87,7 +87,7 @@
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_mail\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
                     </form>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-4">
                     <h2>Zmeniť heslo</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="mb-3">
@@ -97,7 +97,7 @@
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_password\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
                     </form>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-4">
                     <h2>Vymazať profil</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>

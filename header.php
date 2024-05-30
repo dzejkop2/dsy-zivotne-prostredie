@@ -9,6 +9,13 @@
             $rola_user = role_check($conn);
             if(isset($_SESSION["user_id"]) == "") {
                     echo "
+                    <div class=\"collapse navbar-collapse\" id=\"navbar_left\">
+                        <ul class=\"navbar-nav\">
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"./graf.php\">Grafy</a>
+                            </li>
+                        </ul>
+                    </div>
                     <ul class=\"navbar-nav\">
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"./login.php\">Login</a>
@@ -26,6 +33,9 @@
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"./senzor_info.php\">Senzory</a>
                         </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./graf.php\">Graf</a>
+                        </li>
                     </ul>
                 </div>
                 <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarNav\">
@@ -42,6 +52,16 @@
             }
             else {
                 echo "
+                <div class=\"collapse navbar-collapse\" id=\"navbar_left\">
+                    <ul class=\"navbar-nav\">
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./senzor_info.php\">Senzory</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./graf.php\">Graf</a>
+                        </li>
+                    </ul>
+                </div>
                 <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarNav\">
                     <ul class=\"navbar-nav\">
                             <li class=\"nav-item\">

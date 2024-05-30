@@ -28,7 +28,7 @@
                                 <th scope="col">Lokalita</th>
                                 <th scope="col">Posledný update</th>
                                 <th scope="col">Vybavenie</th>
-                                <th scope="col">#</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>

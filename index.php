@@ -1,6 +1,8 @@
 <?php
     include("./connect.php");
     include("./functions.php");
+    include("./querry.php");
+
     session_start();
     $rola_user = role_check($conn);
 ?>
@@ -28,7 +30,7 @@
                     </thead>
                     <tbody>
                         <?php
-                            include("./querry.php");
+                            $query = get_querry(2,$rola_user);
                             $result = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($result) > 0) 
@@ -50,12 +52,14 @@
             </div>
             <div class="col-4">
                 <div class="row mb-2">
-                    <h2>Kategória dát:</h2>
-                    <?php include("./dropdown_kategoria.php");?>
-                </div>
-                <div class="row mb-2">
-                    <h2>Čas dát:</h2>
-                    <?php include("./dropdown_cas.php");?>
+                    <div class="col-6">
+                        <h2>Kategória dát:</h2>
+                        <?php include("./dropdown_kategoria.php");?>
+                    </div>
+                    <div class="col-6">
+                        <h2>Čas dát:</h2>
+                        <?php include("./dropdown_cas.php");?>
+                    </div>
                 </div>
                 <div class="row mb-2">  
                     <h2>Miesta:</h2>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 23, 2024 at 08:08 PM
+-- Generation Time: May 30, 2024 at 06:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,9 @@ INSERT INTO `data` (`id`, `kategoria_id`, `hodnota`, `senzor_id`, `datum`) VALUE
 (2, 2, 18.00, 1, '2024-05-09 18:04:34'),
 (3, 2, 8.00, 3, '2024-05-10 08:05:52'),
 (4, 2, 19.00, 1, '2024-05-10 08:56:02'),
-(5, 2, 19.00, 1, '2024-05-23 19:52:16');
+(12, 1, 20.50, 4, '2024-05-28 17:12:02'),
+(13, 2, 50.00, 1, '2024-05-30 18:50:58'),
+(14, 2, 15.00, 1, '2024-05-23 18:51:34');
 
 -- --------------------------------------------------------
 
@@ -103,9 +105,11 @@ CREATE TABLE `senzor` (
 --
 
 INSERT INTO `senzor` (`id`, `lokacia`, `posledny_update`, `vybavenie`) VALUES
-(1, 'Kysucké Nové Mesto', '2024-05-23 19:52:16', 'teplomer'),
+(1, 'Kysucké Nové Mesto', '2024-05-26 16:13:24', 'teplomer'),
 (2, 'Kysucké Nové Mesto', '2024-05-03 09:09:09', 'vlhkomer'),
-(3, 'Vranov nad Topľou', '2024-05-23 19:48:08', 'teplomer');
+(3, 'Vranov nad Topľou', '2024-05-23 19:48:08', 'teplomer'),
+(4, 'Žabokreky nad Nitrou', '2024-05-26 15:36:52', 'teplomer'),
+(5, 'Žabokreky nad Nitrou', '2024-05-26 16:22:27', 'vlhkomer');
 
 -- --------------------------------------------------------
 
@@ -127,7 +131,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `meno`, `email`, `heslo`, `id_rola`) VALUES
 (1, 'Tonko Maslak', 'tonko@tonko.tonko', 'tonislav123', 2),
-(4, 'kupko kupko', 'kupko@kupko.kupko', 'kupko123', 1);
+(8, 'kupko hulik', 'kupko@hulik.com', 'hulikjegay', 1);
 
 --
 -- Indexes for dumped tables
@@ -175,7 +179,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `data`
 --
 ALTER TABLE `data`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `kategoria`
@@ -193,13 +197,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `senzor`
 --
 ALTER TABLE `senzor`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
