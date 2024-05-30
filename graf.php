@@ -90,10 +90,10 @@ if (!isset($_GET["lokalita"]) || !isset($_GET["kategoria"])) {
     <header><?php include_once("./header.php"); ?></header>
     <div class="container-xxl column-gap-3">
         <div class="row mt-2">
-            <div class="col-10">
+            <div class="col-9">
                 <div id="chart_div" style="height:500px;"></div>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <div class="row mb-2">
                     <h2>Kategória dát:</h2>
                     <?php include("./dropdown_kategoria_special.php"); ?>

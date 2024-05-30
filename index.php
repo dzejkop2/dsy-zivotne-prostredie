@@ -52,11 +52,11 @@
             </div>
             <div class="col-4">
                 <div class="row mb-2">
-                    <div class="col-6">
+                    <div class="col-7">
                         <h2>Kategória dát:</h2>
                         <?php include("./dropdown_kategoria.php");?>
                     </div>
-                    <div class="col-6">
+                    <div class="col-5">
                         <h2>Čas dát:</h2>
                         <?php include("./dropdown_cas.php");?>
                     </div>
