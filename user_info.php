@@ -59,6 +59,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <title>Profil | Životné prostredie</title>
 </head>
 <body>
@@ -67,10 +68,10 @@
         <div class="row mt-2 d-flex justify-content-center">
             <h1><?php echo $meno;?></h1>
             <div class="col-5">
-                <h2 class="my-3">Email: <?php echo $email;?></h2>
-                <h2>Rola: <?php echo $rola_user;?></h2>
+                <h2 class="my-2">Email: </h2> <?php echo "<p class=\"fs-4 mb-3\">$email</p>";?>
+                <h2 class="">Rola: </h2> <?php echo "<p class=\"fs-4 mb-3\">$rola_user</p>"?>
             </div>
-            <div class="col-3">
+            <div class="col-4">
             <?php if (isset($success)): ?>
                 <div class="alert alert-success"><?php echo $success; ?></div>
             <?php endif; ?>
@@ -87,7 +88,7 @@
                         <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"new_mail\" value=\"".$_SESSION["user_id"]."\">Zmeniť</button>"; ?>
                     </form>
                 </div>
-                <div class="row mb-4">
+                <div class="row mb-5">
                     <h2>Zmeniť heslo</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="mb-3">
@@ -98,10 +99,14 @@
                     </form>
                 </div>
                 <div class="row mb-4">
-                    <h2>Vymazať profil</h2>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <?php echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>
-                    </form>
+                    <div class="col-10">
+                        <h2>Vymazať profil</h2>
+                    </div>
+                    <div class="col-2">
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <?php echo "<button type=\"submit\" class=\"btn btn-primary float-end\" name=\"del\" value=\"".$_SESSION["user_id"]."\">Vymazať</button>"; ?>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
