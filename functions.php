@@ -61,6 +61,34 @@ function role_check($conn) {
         } 
     }
 }
+
+function role_get($conn, $role_id) {
+    $query = "SELECT * FROM role WHERE id = ".$role_id."";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) 
+    { 
+        while($row = mysqli_fetch_assoc($result)) 
+        { 
+            $rola_user = $row["nazov"];
+            return $rola_user;
+        } 
+    } 
+}
+
+function role_id_get($conn, $role) {
+    $query = "SELECT * FROM role WHERE nazov = \"".$role."\"";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) 
+    { 
+        while($row = mysqli_fetch_assoc($result)) 
+        { 
+            $rola_user = $row["id"];
+            return $rola_user;
+        } 
+    } 
+}
 /*
 function kategoria_checker($senzor_id,$conn) {
     $query = "SELECT * FROM senzor WHERE id = ".$senzor_id."";

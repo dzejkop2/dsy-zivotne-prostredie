@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 30, 2024 at 06:52 PM
+-- Generation Time: Jun 02, 2024 at 04:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,8 @@ INSERT INTO `data` (`id`, `kategoria_id`, `hodnota`, `senzor_id`, `datum`) VALUE
 (4, 2, 19.00, 1, '2024-05-10 08:56:02'),
 (12, 1, 20.50, 4, '2024-05-28 17:12:02'),
 (13, 2, 50.00, 1, '2024-05-30 18:50:58'),
-(14, 2, 15.00, 1, '2024-05-23 18:51:34');
+(14, 2, 15.00, 1, '2024-05-23 18:51:34'),
+(15, 2, 15.55, 1, '2024-05-31 06:13:24');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `nazov`) VALUES
 (1, 'vedec'),
 (2, 'uradnik'),
-(3, 'obyvatel');
+(3, 'obyvatel'),
+(4, 'admin');
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `meno`, `email`, `heslo`, `id_rola`) VALUES
 (1, 'Tonko Maslak', 'tonko@tonko.tonko', 'tonislav123', 2),
-(8, 'kupko hulik', 'kupko@hulik.com', 'hulikjegay', 1);
+(9, 'admin', 'admin@admin.admin', 'admin123', 4);
 
 --
 -- Indexes for dumped tables
@@ -179,7 +181,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `data`
 --
 ALTER TABLE `data`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `kategoria`
@@ -191,7 +193,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `senzor`
@@ -203,7 +205,7 @@ ALTER TABLE `senzor`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

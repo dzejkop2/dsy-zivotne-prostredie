@@ -1,7 +1,7 @@
 <?php 
 function get_querry($choice, $rola_user) {
     if($choice == 1) {
-        if($rola_user == "uradnik" || $rola_user == "vedec") {
+        if($rola_user == "uradnik" || $rola_user == "vedec" || $rola_user == "admin") {
             if(isset($_GET["cas"])) {
                 if(isset($_GET["senzor"])) {
                     $query = "
@@ -135,7 +135,7 @@ function get_querry($choice, $rola_user) {
         }
     }
     else if($choice == 2) {
-        if($rola_user == "uradnik" || $rola_user == "vedec") {
+        if($rola_user == "uradnik" || $rola_user == "vedec" || $rola_user == "admin") {
             if(isset($_GET["cas"])) {
                 if(isset($_GET["kategoria"])) {
                     $query = "
@@ -229,7 +229,7 @@ function get_querry($choice, $rola_user) {
         }
     }
     else if($choice == 3) {
-        if($rola_user == "uradnik" || $rola_user == "vedec") {
+        if($rola_user == "uradnik" || $rola_user == "vedec" || $rola_user == "admin") {
             if(isset($_GET["cas"])) {
                 if(isset($_GET["senzor"])) {
                     $query = "

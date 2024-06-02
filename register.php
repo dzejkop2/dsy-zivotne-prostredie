@@ -2,6 +2,8 @@
     include("./connect.php");
     include("./functions.php");
     session_start();
+    $rola_user = role_check($conn);
+
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         $name = $_POST['krstne_meno'];
@@ -9,12 +11,31 @@
         $full_name = "".$name." ".$surname."";
         $email = $_POST['email'];
         $password = $_POST['heslo'];
-        $role = $_POST["role_select"];
+        if(isset($_POST["role_select"])) {
+            $role = $_POST["role_select"];
+        }
+        else {
+            $query = "
+            SELECT *
+            FROM role WHERE nazov = \"obyvatel\"
+            "; 
+            $result = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result) > 0) { 
+                while($row = mysqli_fetch_assoc($result)) { 
+                    $role = $row["id"];
+                } 
+            }
+            
+        }
+        
         $query = "SELECT * FROM users WHERE email = \"".$email."\";"; 
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) == 0) { 
             $sql = "INSERT INTO `users` (`meno`, `email`, `heslo`, `id_rola`) VALUES (\"$full_name\", \"$email\", \"$password\", \"$role\")";
             if(mysqli_query($conn, $sql)) {
+                if($rola_user == "admin"){
+                    header("Location: admin.php");
+                }
                 $register_success = "Registracia uspešna! Teraz sa možeš prihlasiť.";
             } 
             else {
@@ -63,13 +84,14 @@
                 <label for="heslo" class="form-label">Heslo</label>
                 <input type="password" class="form-control" id="heslo" name="heslo" required>
             </div>
+            <?php if($rola_user == "admin") {?>
             <div class="mb-3">
                 <label for="role_select" class="form-label">Rola</label>
                 <select class="form-select" id="role_select" name="role_select" aria-label="select">
                     <?php 
                         $query = "
                         SELECT *
-                        FROM role
+                        FROM role WHERE nazov != \"admin\"
                         "; 
                         $result = mysqli_query($conn, $query);
                         if (mysqli_num_rows($result) > 0) { 
@@ -85,6 +107,7 @@
                     ?>
                 </select>
             </div>
+            <?php };?>
             <button type="submit" class="btn btn-primary" name="register">Register</button>
         </form>
     </div>

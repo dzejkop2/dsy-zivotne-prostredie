@@ -50,6 +50,33 @@
                 </div>
                 ";
             }
+            else if($rola_user == "admin") {
+                echo "
+                <div class=\"collapse navbar-collapse\" id=\"navbar_left\">
+                    <ul class=\"navbar-nav\">
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./senzor_info.php\">Senzory</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./graf.php\">Graf</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./admin.php\">Admin</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarNav\">
+                    <ul class=\"navbar-nav\">
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./user_info.php\">".get_name($_SESSION["user_id"],$conn)."</a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"./logout.php\">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                ";
+            }
             else {
                 echo "
                 <div class=\"collapse navbar-collapse\" id=\"navbar_left\">
