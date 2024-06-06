@@ -55,12 +55,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <title>Register | Životné prostredie</title>
+    <title><?php if($rola_user == "admin") {
+        echo "Pridanie užívateľa";
+    } else {
+        echo "Register";
+    }?> | Životné prostredie</title>
 </head>
 <body>
     <header><?php include_once("./header.php")?></header>
     <div class="container-sm mt-3" style="max-width:500px;">
-        <h2 class="text-center mb-4">Register</h2>
+        <h2 class="text-center mb-4"><?php if($rola_user == "admin") {
+        echo "Pridanie užívateľa";
+        } else {
+            echo "Register";
+        }?>
+        </h2>
         <?php if (isset($register_success)): ?>
             <div class="alert alert-success"><?php echo $register_success; ?></div>
         <?php endif; ?>

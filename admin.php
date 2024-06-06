@@ -43,7 +43,6 @@
                                 <th scope="col">Meno</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Rola</th>
-                                <th scope="col">Heslo</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -61,7 +60,6 @@
                                             <td>".$row["id"]."</td>
                                             <td>".$row["meno"]."</td>
                                             <td>".$row["email"]."</td>
-                                            <td>".$row["heslo"]."</td>
                                             <td>".role_get($conn,$row["id_rola"])."</td>
                                             <td><button type=\"submit\" formaction=\"".htmlspecialchars($_SERVER["PHP_SELF"])."\" class=\"btn btn-primary\" style=\"--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .45rem; --bs-btn-font-size: .7rem;\" name=\"del\" value=\"".$row["id"]."\">Vymazať</button></td>
                                         </tr>"; 

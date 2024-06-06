@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2024 at 04:19 PM
+-- Generation Time: Jun 06, 2024 at 07:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -132,8 +132,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `meno`, `email`, `heslo`, `id_rola`) VALUES
-(1, 'Tonko Maslak', 'tonko@tonko.tonko', 'tonislav123', 2),
-(9, 'admin', 'admin@admin.admin', 'admin123', 4);
+(9, 'admin', 'admin@admin.admin', 'admin123', 4),
+(14, 'uradnik uradnik', 'uradnik@uradnik.uradnik', 'uradnik123', 2),
+(15, 'obyvatel obyvatel', 'obyvatel@obyvatel.obyvatel', 'obyvatel123', 3),
+(16, 'vedec vedec', 'vedec@vedec.vedec', 'vedec123', 1);
 
 --
 -- Indexes for dumped tables
@@ -205,7 +207,7 @@ ALTER TABLE `senzor`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
